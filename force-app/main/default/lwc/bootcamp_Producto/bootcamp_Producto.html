@@ -1,0 +1,50 @@
+<template>
+    <div class="slds-text-align_center slds-border_top">
+        <template if:true={typePicklist.data}>
+            <lightning-combobox
+            name="Type"
+            label="Choose a vehicle"
+            value={type_value}
+            options={typePicklist.data.values} 
+            onchange={handleSelectVehicle}></lightning-combobox>
+        </template>
+        <template if:true={brandPicklist.data}>
+            <lightning-combobox
+            name="Brand"
+            label="Choose a car brand"
+            value={brand_value}
+            onchange={handleSelectBrand}
+            options={brandPicklist.data.values} ></lightning-combobox>
+        </template>
+        <template if:true={modelPicklist.data}>
+            <lightning-combobox
+            name="Model"
+            label="Choose a car model"
+            value={model_value}
+            onchange={handleSelectModel}
+            options={modelPicklist.data.values} ></lightning-combobox>
+        </template>
+        <lightning-button variant="brand" label="Search" title="Primary action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    <div class="slds-text-align_center slds-m-top_xx-large">
+        <template if:false={showNoResultMessage}>    
+            <lightning-layout class="table-container" padding="around-small">
+                <template if:true={productList}>
+                    <c-salesforce-codex-data-table 
+                        key-field="id"
+                        data={productList}
+                        show-row-number-column="false"
+                        hide-checkbox-column="false"
+                        columns={columns}>
+                    </c-salesforce-codex-data-table>
+                </template>
+            </lightning-layout>
+        </template>
+        <template if:true={showNoResultMessage}>
+            <div class="error-msg">
+                No results
+            </div>
+        </template>
+    </div>
+
+</template>

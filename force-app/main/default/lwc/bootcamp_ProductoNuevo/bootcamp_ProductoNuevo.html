@@ -1,0 +1,61 @@
+<template>
+    <lightning-button variant="brand" label="New Car" title="New Car" onclick={openModal} class="slds-m-left_x-small"></lightning-button><br><br>
+    <template if:false={showNoResultMessage}>
+        <lightning-layout class="table-container slds-text-align_center">
+            <template if:true={productList}>
+                <c-salesforce-codex-data-table
+                    class ="slds-text-align_center"
+                    key-field="id"
+                    data={productList}
+                    show-row-number-column="false"
+                    hide-checkbox-column="false"
+                    onsave={handleSave}
+                    columns={columns}>
+                </c-salesforce-codex-data-table>
+            </template>
+        </lightning-layout>
+    </template>
+    <template if:true={showNoResultMessage}>
+        <div class="error-msg">
+            No results
+        </div>
+    </template>
+
+    <template if:true={isOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeQuickAction}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Insert Car</h2>
+                </header>
+                <div class="slds-modal__content slds-text-align_center">
+                    <lightning-layout >
+                        <lightning-layout-item class="slds-col slds-text-align_center slds-theme_info slds-p-around_xx-large">
+                            <lightning-combobox name="model" label="Model" value={selectedModel} options={modelPicklist.data.values} onchange={handleSelectModel}></lightning-combobox>
+                            <lightning-combobox name="brand" label="Brand" value={selectedBrand} options={brandPicklist.data.values} onchange={handleSelectBrand} ></lightning-combobox>
+                            <lightning-combobox name="vehicle" label="Vehicle" value={selectedVehicle} options={typePicklist.data.values} onchange={handleSelectType}></lightning-combobox>
+                            <lightning-input type="file" accept="image/jpeg, image/png, image/jpg" label="Image" onchange={openfileUpload}></lightning-input>
+                            <template if:true={fileData}>
+                                <p>{fileData.fileName}</p>
+                            </template>
+                            <lightning-input type="text" name="color" label="Color" value={valueColor} onchange={handleSelectColor}></lightning-input>
+                            <lightning-input type="number" formatter="currency" label="Price" onchange={handlePriceValue}></lightning-input>
+                            <lightning-input type="checkbox" label="Active?" onchange={handleIsActive} value={isActive}></lightning-input>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeQuickAction} title="Cancelar">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={submitDetails} title="Agregar">OK</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

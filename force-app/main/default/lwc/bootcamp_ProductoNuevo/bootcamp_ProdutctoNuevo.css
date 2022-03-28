@@ -1,0 +1,12 @@
+/*.c-container {
+  border: 10px solid #d8dde6;
+  margin: 10px 0 20px 0;
+  width: 100%;
+  text-align: center;
+}
+.insertNewCar{
+  slds-c-input-color-background:black;
+}*/
+h1 {
+  font-size: xx-large;
+}

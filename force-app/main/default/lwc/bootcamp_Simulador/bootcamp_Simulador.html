@@ -1,0 +1,20 @@
+<template>
+    <div class="slds-align_absolute-center slds-border_top slds-size_2-of-4">
+        <div>
+            <lightning-combobox name="model" label="Model" value={modelValue} options={modelOptions}></lightning-combobox>
+            <lightning-input type="number" value={amount} label="Amount" onchange={handleAmountChange}></lightning-input>
+            <lightning-input type="number" value={downPayment} label="Down Payment" onchange={handleDownPaymentChange}></lightning-input>
+            <lightning-combobox name="term"  label="Term" value={termValue} options={termOptions} onchange={handleTermChange}></lightning-combobox>
+            <br>
+            <br>
+            <lightning-button variant="brand" label="Calculate" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+            <lightning-button icon-name="utility:download" variant="success" label="Download as CSV" onclick={downloadCSVFile} class="slds-m-left_x-small"></lightning-button>
+            <br>
+            <br>
+            <br>
+            <template if:true={data}>
+                <lightning-datatable key-field="id"  data={data}  columns={columns}>  </lightning-datatable>
+            </template>
+        </div>
+    </div>
+</template>

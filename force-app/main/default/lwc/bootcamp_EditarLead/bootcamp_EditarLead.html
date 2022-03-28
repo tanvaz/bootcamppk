@@ -1,0 +1,12 @@
+<template>
+    <template if:true={leadList.data}>
+        <lightning-datatable
+                key-field="Id"
+                data={leadList.data}
+                columns={columns}
+                draft-values={fldsItemValues} 
+                onsave={handleSave}
+                onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </template>
+</template>

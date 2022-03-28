@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-size_3-of-4 slds-align_absolute-center">
+        <div class="slds-box slds-box_x-small slds-align_absolute-center" >
+            <lightning-carousel  disable-auto-scroll>
+                <template for:each={listUrls} for:item="url">
+                    <lightning-carousel-image
+                        key={url}
+                        src = "{url}">
+                    </lightning-carousel-image>
+                </template>
+            </lightning-carousel>
+        </div>
+    </div>
+</template>
